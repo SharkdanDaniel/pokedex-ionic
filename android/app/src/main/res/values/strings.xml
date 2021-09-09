@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Pokedex Dan</string>
+    <string name="title_activity_main">Pokedex Dan</string>
+    <string name="package_name">com.daniel.pokedex</string>
+    <string name="custom_url_scheme">com.daniel.pokedex</string>
+</resources>

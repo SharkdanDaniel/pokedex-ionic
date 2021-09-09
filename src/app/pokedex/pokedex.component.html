@@ -1,0 +1,66 @@
+<ion-header>
+    <ion-toolbar color="tertiary">
+
+        <!-- <ion-buttons size="small" slot="start">
+            <ion-menu-button autoHide="false"></ion-menu-button>
+        </ion-buttons> -->
+
+        <ion-buttons class="ion-no-margin" slot="start">
+            <ion-back-button color="light"></ion-back-button>
+        </ion-buttons>
+
+        <ion-title class="">
+            Pokédex
+        </ion-title>
+
+        <ion-select (ionChange)="filterAllPokemons(filterType)" class="type-select" [(ngModel)]="filterType" [interfaceOptions]="customActionSheetOptions" interface="action-sheet" slot="end" #select1>
+            <ion-select-option *ngFor="let type of types" [value]="type.text">{{ type.text }}</ion-select-option>
+        </ion-select>
+
+        <ion-button slot="end" (click)="presentPopover($event)" expand="" fill="clear" shape="round" size="small">
+            <ion-icon slot="icon-only" size="large" color="light" name="ellipsis-vertical"></ion-icon>
+        </ion-button>
+
+    </ion-toolbar>
+
+    <ion-toolbar color="medium">
+        <ion-searchbar #search debounce="200" (ionChange)="filterPokemons($event)"></ion-searchbar>
+    </ion-toolbar>
+
+</ion-header>
+
+<ion-content>
+    <!-- <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
+        </ion-refresher-content>
+    </ion-refresher> -->
+
+    <div *ngIf="pokemons.length == 0 || pokemons == null" class="ion-text-center">
+        <ion-label>Not Found</ion-label>
+    </div>
+
+    <ion-list>
+        <ion-item routerLink="/pokedex/pokemon-profile/{{ pokemon.id }}" routerLinkActive="router-link-active" *ngFor="let pokemon of pokemons">
+            <div class="img">
+                <ion-thumbnail>
+                    <ion-img class="" [src]=" getSprite(pokemon.id) "></ion-img>
+                </ion-thumbnail>
+            </div>
+            <div>
+                <ion-label>{{ pokemon.name | titlecase }}</ion-label>
+                <ion-label>#{{ pokemon.id | number: '3.0'}}</ion-label>
+            </div>
+            <div slot="end" class="ion-no-margin types ion-justify-content-end" *ngFor="let type of pokemon.types ">
+                <ion-label class="types-label" [ngStyle]="setColor(type.name)">{{ type.name | titlecase }}</ion-label>
+            </div>
+        </ion-item>
+    </ion-list>
+
+    <!-- <ion-infinite-scroll threshold="10%" [disabled]="false" position="bottom" (ionInfinite)="loadData($event)">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more pokemons...">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll> -->
+    <div *ngIf="showSpinner" class="spinner">
+        <ion-spinner name="bubbles" color="tertiary"></ion-spinner>
+    </div>
+</ion-content>

@@ -1,0 +1,14 @@
+{
+  "appId": "com.daniel.pokedex",
+  "appName": "PokeDan",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www",
+  "linuxAndroidStudioPath": "/opt/android-studio-4.1/android-studio/bin/studio.sh",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  },
+  "cordova": {}
+}
